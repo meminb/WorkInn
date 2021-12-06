@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "965719352746",
+    "project_id": "workinnrepo",
+    "storage_bucket": "workinnrepo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965719352746:android:00403f57f8aaf6403e77d3",
+        "android_client_info": {
+          "package_name": "com.example.workinn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965719352746-vinqip83te9j92ot7e0j8lc4bjc9ig92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3t-thKIXwrOE4ULgENKQsbUD49dyoN3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965719352746-vinqip83te9j92ot7e0j8lc4bjc9ig92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
