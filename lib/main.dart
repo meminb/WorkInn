@@ -52,8 +52,7 @@ class _MainState extends State<Main> {
     return AppBar(
       actions: [
         IconButton(
-            onPressed: () => print("Demonstrate"),
-            icon: Icon(Icons.access_alarm))
+            onPressed: () => print("Demo"), icon: Icon(Icons.access_alarm))
       ],
     );
   }
