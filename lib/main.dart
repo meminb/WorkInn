@@ -36,6 +36,7 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: appbar(),
       body: pages[_currentIndex],
       bottomNavigationBar: navigationbar(),
@@ -50,30 +51,60 @@ class _MainState extends State<Main> {
 
   AppBar appbar() {
     return AppBar(
-      actions: [
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: const Text('WorkInn',
+          style: TextStyle(color: Colors.deepPurple, fontFamily: 'Raleway')),
+      leading: IconButton(
+        icon: ImageIcon(AssetImage('assets/images/dumbbell.png'),
+            color: Colors.black, size: 32),
+        onPressed: () {
+          // do something
+        },
+      ),
+      actions: <Widget>[
         IconButton(
-            onPressed: () => print("Demonstrate"),
-            icon: Icon(Icons.access_alarm))
+          icon: new Icon(Icons.filter_list, color: Colors.black45, size: 32),
+          onPressed: () {
+            // do something
+          },
+        )
       ],
     );
   }
 
+  //Navigation-Bar Design And Tapped Logic
   Widget navigationbar() {
-    return BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.black),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.perm_identity), label: 'Person'),
-        ]);
+    return Container(
+      child: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: Container(
+            clipBehavior: Clip.hardEdge,
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(15.0)),
+            child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                iconSize: 30,
+                backgroundColor: Colors.deepPurple.shade50,
+                selectedFontSize: 0,
+                currentIndex: _currentIndex,
+                onTap: _onItemTapped,
+                selectedIconTheme:
+                    IconThemeData(color: Colors.deepPurple.shade200),
+                unselectedItemColor: Colors.grey,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: new Icon(Icons.home),
+                      label: '',
+                      backgroundColor: Colors.black),
+                  BottomNavigationBarItem(
+                    icon: new Icon(Icons.bar_chart),
+                    label: '',
+                  ),
+                  BottomNavigationBarItem(
+                      icon: new Icon(Icons.perm_identity), label: ''),
+                ]),
+          )),
+    );
   }
 }
