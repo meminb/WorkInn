@@ -24,8 +24,21 @@ class MyApp extends StatelessWidget {
 }
 
 List pages = [Homepage(), Statistics(), Profile()];
-
 int _currentIndex = 0;
+IconButton _leadingButton = new IconButton(
+  icon: ImageIcon(AssetImage('assets/images/dumbbell.png'),
+      color: Colors.black, size: 32),
+  onPressed: () {
+    // do something
+  },
+);
+String _appBarTitle = 'WorkInn';
+IconButton _actionButton = new IconButton(
+  icon: new Icon(Icons.filter_list, color: Colors.black45, size: 32),
+  onPressed: () {
+    // do something
+  },
+);
 
 class Main extends StatefulWidget {
   @override
@@ -44,6 +57,69 @@ class _MainState extends State<Main> {
   }
 
   void _onItemTapped(int index) {
+    switch (index) {
+      case 0:
+        {
+          _leadingButton = IconButton(
+            icon: ImageIcon(AssetImage('assets/images/dumbbell.png'),
+                color: Colors.black, size: 32),
+            onPressed: () {
+              // do something
+            },
+          );
+          _appBarTitle = 'WorkInn';
+          _actionButton = IconButton(
+            icon: new Icon(Icons.filter_list, color: Colors.black45, size: 32),
+            onPressed: () {
+              // do something
+            },
+          );
+        }
+        break;
+
+      case 1:
+        {
+          _leadingButton = IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.black, size: 32),
+            onPressed: () {
+              // do something
+            },
+          );
+          _appBarTitle = 'Progress';
+          _actionButton = IconButton(
+            icon: new Icon(Icons.swap_calls, color: Colors.black45, size: 32),
+            onPressed: () {
+              // do something
+            },
+          );
+        }
+        break;
+
+      case 2:
+        {
+          _leadingButton = IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.black, size: 32),
+            onPressed: () {
+              // do something
+            },
+          );
+          _appBarTitle = 'Profile';
+          _actionButton = IconButton(
+            icon:
+                new Icon(Icons.notifications, color: Colors.black45, size: 32),
+            onPressed: () {
+              // do something
+            },
+          );
+        }
+        break;
+
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
     setState(() {
       _currentIndex = index;
     });
@@ -53,23 +129,10 @@ class _MainState extends State<Main> {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: const Text('WorkInn',
+      title: Text(_appBarTitle,
           style: TextStyle(color: Colors.deepPurple, fontFamily: 'Raleway')),
-      leading: IconButton(
-        icon: ImageIcon(AssetImage('assets/images/dumbbell.png'),
-            color: Colors.black, size: 32),
-        onPressed: () {
-          // do something
-        },
-      ),
-      actions: <Widget>[
-        IconButton(
-          icon: new Icon(Icons.filter_list, color: Colors.black45, size: 32),
-          onPressed: () {
-            // do something
-          },
-        )
-      ],
+      leading: _leadingButton,
+      actions: <Widget>[_actionButton],
     );
   }
 
