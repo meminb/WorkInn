@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workinn/frontend/profile.dart';
+import 'widgets/WorkoutWidgets.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -13,6 +14,42 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        body: ListView(children: [
+          WorkoutWidgets.WokoutListViewItem(),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+          ListTile(
+            title: Text("dlskfj"),
+          ),
+        ]),
         floatingActionButton: FloatingActionButton(
           onPressed: () => _showMyDialog(),
           highlightElevation: 50,
@@ -61,6 +98,7 @@ class CreateWorkoutState extends State<CreateWorkoutForm> {
   final _formKey = GlobalKey<FormState>();
   int? _radioSelected;
   String _radioVal = "";
+  final List<String> textFieldsValue = [];
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -76,6 +114,7 @@ class CreateWorkoutState extends State<CreateWorkoutForm> {
               if (weight == null || weight.isEmpty) {
                 return 'Please enter weight, this field can not be empty.';
               }
+              textFieldsValue.add(weight);
               return null;
             },
           ),
@@ -87,6 +126,7 @@ class CreateWorkoutState extends State<CreateWorkoutForm> {
               if (height == null || height.isEmpty) {
                 return 'Please enter height, this field can not be empty.';
               }
+              textFieldsValue.add(height);
               return null;
             },
           ),
@@ -148,6 +188,8 @@ class CreateWorkoutState extends State<CreateWorkoutForm> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   print(_radioVal);
+                  _formKey.currentState!.validate();
+                  print(textFieldsValue);
                   Navigator.pop(context);
                 }
               },

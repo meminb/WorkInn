@@ -127,7 +127,7 @@ class _MainState extends State<Main> {
 
   AppBar appbar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       elevation: 0,
       title: Text(_appBarTitle,
           style: TextStyle(color: Colors.deepPurple, fontFamily: 'Raleway')),
