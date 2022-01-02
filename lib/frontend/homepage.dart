@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:workinn/model/USER.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -17,8 +19,8 @@ class _HomepageState extends State<Homepage> {
         backgroundColor: Colors.green,
         child: Icon(Icons.add),
         onPressed: () {
-          FirebaseFirestore.instance.collection('data').add(
-              {'text': '!!!!!!!!!WORKINN ÇALIŞIYOR TEBRİKLER!!!!!!!!!!!!'});
+          User? current = USER().getCurrentUser();
+          print(current!.email.toString());
         },
       ),
     );
