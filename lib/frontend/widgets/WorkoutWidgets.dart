@@ -19,7 +19,7 @@ class WorkoutWidgets {
             Text("Number of Exercises: 5")
           ],
         ),
-        trailing: Icon(Icons. ),
+        trailing: Icon(Icons.ac_unit),
         onTap: null,
       ),
     );
