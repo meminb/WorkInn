@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workinn/Auth/AuthExceptionHandler.dart';
 import 'package:workinn/Auth/AuthResultStatus.dart';
 import 'package:workinn/model/USER.dart';
-import 'package:workinn/model/USER.dart';
 
 class UserRepository {
   signUp(String email, String password, String name, String surname) async {
