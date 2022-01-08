@@ -13,13 +13,13 @@ void main() async {
 
 class MyApp extends StatelessWidget {
 // This widget is the root
-// of your application.
+// of your application.sd
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Firebase',
-      home: SignIn(),
+      home: Main(),
     );
   }
 }

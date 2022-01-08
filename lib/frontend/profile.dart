@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:workinn/repository/ExercisesRepository.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -15,10 +16,7 @@ class _ProfileState extends State<Profile> {
       child: FloatingActionButton(
         backgroundColor: Colors.blue,
         child: Icon(Icons.add),
-        onPressed: () {
-          FirebaseFirestore.instance.collection('data').add(
-              {'text': '!!!!!!!!!WORKINN ÇALIŞIYOR TEBRİKLER!!!!!!!!!!!!'});
-        },
+        onPressed: () async {},
       ),
     );
   }
