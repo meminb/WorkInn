@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:workinn/frontend/exercises-pages/exercisepage.dart';
 import 'package:workinn/model/Exercise.dart';
 
@@ -57,7 +56,12 @@ class _ExerciseState extends State<ExerciseMain> {
             primary: Colors.deepPurple.shade200,
           ),
           onPressed: () {
-            Get.to(ExercisePage(widget.listOfExercises));
+            //Get.to(ExercisePage(widget.listOfExercises));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ExercisePage(widget.listOfExercises)));
           },
           child: const Text('Start Workout'),
         ),

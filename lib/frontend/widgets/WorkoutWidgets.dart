@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:workinn/frontend/exercises-pages/exercisemain.dart';
 import 'package:workinn/model/Workout.dart';
 
 class WorkoutWidgets {
-  static Widget workoutListviewItem(Workout workout) {
+  static Widget workoutListviewItem(Workout workout, BuildContext context) {
     return Card(
       elevation: 5,
       child: ListTile(
@@ -23,7 +22,11 @@ class WorkoutWidgets {
           ),
           trailing: Icon(Icons.ac_unit),
           onTap: () {
-            Get.to(ExerciseMain(workout.exerciseList));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ExerciseMain(workout.exerciseList)));
+            // Get.to(ExerciseMain(workout.exerciseList));
           }),
     );
   }
