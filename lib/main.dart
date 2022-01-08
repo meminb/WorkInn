@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:workinn/frontend/autherization-pages/signin.dart';
+import 'package:get/get.dart';
 import 'package:workinn/frontend/homepage.dart';
 import 'package:workinn/frontend/profile.dart';
 import 'package:workinn/frontend/statistics.dart';
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 // of your application.sd
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Firebase',
       home: Main(),
