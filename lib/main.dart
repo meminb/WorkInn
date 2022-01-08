@@ -4,10 +4,15 @@ import 'package:workinn/frontend/autherization-pages/signin.dart';
 import 'package:workinn/frontend/homepage.dart';
 import 'package:workinn/frontend/profile.dart';
 import 'package:workinn/frontend/statistics.dart';
+import 'package:workinn/repository/ExercisesRepository.dart';
+import 'package:workinn/repository/WorkoutRepository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
+  ExercisesRepository.assignExercisesFromDB();
+  WorkoutRepository.assignCommonWorkoutsFromCollection();
   runApp(MyApp());
 }
 
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Firebase',
-      home: Main(),
+      home: SignIn(),
     );
   }
 }

@@ -20,6 +20,7 @@ class _SignInState extends State<SignIn> {
   UserController controller = new UserController(new UserRepository());
   @override
   Widget build(BuildContext context) {
+    signIn("kucuksaid@hotmail.com", "123123123"); //auto login
     return Scaffold(
       backgroundColor: Colors.white,
       key: _scaffoldKey,
@@ -76,14 +77,8 @@ class _SignInState extends State<SignIn> {
                       borderRadius: BorderRadius.circular(24),
                     ),
                     onPressed: () {
-                      //  if (_status != AuthResultStatus.successful) {
-
-                      print(_email.text);
-                      signIn(_email.text, _password.text);
-
-                      //  }
-
-                      //  Navigator.of(context).pushNamed(HomePage.tag);
+                      //print(_email.text);
+                      //signIn(_email.text, _password.text);
                     },
                     padding: EdgeInsets.all(12),
                     color: Colors.green[400],
