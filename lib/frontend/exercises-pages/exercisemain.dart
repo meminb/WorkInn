@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:workinn/frontend/exercises-pages/exercisepage.dart';
+import 'package:workinn/model/Exercise.dart';
 
 import '../../TestConstants.dart';
 
 class ExerciseMain extends StatefulWidget {
-  const ExerciseMain({Key? key}) : super(key: key);
+  final List<Exercise> listOfExercises;
+  const ExerciseMain(this.listOfExercises);
 
   @override
   _ExerciseState createState() => _ExerciseState();
@@ -27,7 +31,7 @@ class _ExerciseState extends State<ExerciseMain> {
         ),
         color: Colors.deepPurple,
       ),
-      for (var item in TestConstants.workout1.exerciseList)
+      for (var item in widget.listOfExercises)
         Card(
           elevation: 5,
           child: ListTile(
@@ -52,7 +56,9 @@ class _ExerciseState extends State<ExerciseMain> {
             elevation: 5,
             primary: Colors.deepPurple.shade200,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.to(ExercisePage(widget.listOfExercises));
+          },
           child: const Text('Start Workout'),
         ),
       ),

@@ -23,7 +23,7 @@ class WorkoutWidgets {
           ),
           trailing: Icon(Icons.ac_unit),
           onTap: () {
-            Get.to(ExerciseMain());
+            Get.to(ExerciseMain(workout.exerciseList));
           }),
     );
   }

@@ -156,6 +156,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.6.1"
+  gif_view:
+    dependency: "direct main"
+    description:
+      name: gif_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   http_parser:
     dependency: transitive
     description:

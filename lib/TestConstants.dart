@@ -8,7 +8,7 @@ class TestConstants {
       gifPath:
           "https://cdn.dribbble.com/users/2931468/screenshots/5720362/media/c676b4da711c7ec96b67e027fd83a1af.gif",
       setCount: 0,
-      setTime: 20,
+      setTime: 40,
       muscleGroups: ["Full-body", "Large Muscle Groups"],
       level: 1);
   static Exercise exercise2 = new Exercise(
