@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'AuthExceptionHandler.dart';
 import 'AuthResultStatus.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseAuthHelper {
   final _auth = FirebaseAuth.instance;
