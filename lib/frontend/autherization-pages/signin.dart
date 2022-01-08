@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workinn/Auth/AuthExceptionHandler.dart';
 import 'package:workinn/Auth/AuthResultStatus.dart';
-import 'package:workinn/frontend/Controller/UserController.dart';
+import 'package:workinn/Controller/UserController.dart';
 import 'package:workinn/frontend/autherization-pages/signup.dart';
 import 'package:workinn/main.dart';
 import 'package:workinn/repository/UserRepository.dart';

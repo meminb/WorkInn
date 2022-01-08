@@ -1,7 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
+class Exercise {
+  late int exerciseId;
+  late String exerciseName;
+  late String gifPath;
+  late int setCount;
+  late int setTime;
+  late List<String> muscleGroups;
+  late int level;
 
-class EXERCISE {
-  String name = "";
-  String time = "";
-  String gifPath = "";
+  Exercise({
+    required this.exerciseId,
+    required this.exerciseName,
+    required this.gifPath,
+    required this.setCount,
+    required this.setTime,
+    required this.muscleGroups,
+    required this.level,
+  });
 }

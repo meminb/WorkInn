@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:workinn/Auth/AuthExceptionHandler.dart';
 import 'package:workinn/Auth/AuthResultStatus.dart';
-import 'package:workinn/frontend/Controller/UserController.dart';
-import 'package:workinn/frontend/homepage.dart';
+import 'package:workinn/Controller/UserController.dart';
+import 'package:workinn/main.dart';
 import 'package:workinn/repository/UserRepository.dart';
 
 class SignUp extends StatefulWidget {
@@ -118,7 +117,7 @@ class _SignUpState extends State<SignUp> {
       var result = controller.signUp(_email, _password, _name, _surname);
       setState(() {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Homepage()));
+            context, MaterialPageRoute(builder: (context) => Main()));
       });
     }
   }

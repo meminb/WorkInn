@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:workinn/TestConstants.dart';
 import 'package:workinn/frontend/profile.dart';
 import 'widgets/WorkoutWidgets.dart';
 
@@ -15,7 +16,7 @@ class _HomepageState extends State<Homepage> {
     return Container(
       child: Scaffold(
         body: ListView(children: [
-          WorkoutWidgets.WokoutListViewItem(),
+          WorkoutWidgets.workoutListviewItem(TestConstants.workout1),
           ListTile(
             title: Text("dlskfj"),
           ),
