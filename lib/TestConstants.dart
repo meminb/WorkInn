@@ -1,5 +1,6 @@
 import 'package:workinn/model/Exercise.dart';
 import 'package:workinn/model/Workout.dart';
+import 'package:workinn/model/WorkoutHistory.dart';
 
 class TestConstants {
   static Exercise exercise1 = new Exercise(

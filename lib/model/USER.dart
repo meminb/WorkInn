@@ -7,7 +7,7 @@ class USER {
   static String surname = "";
   static String userID = "";
   static late List<Workout> workoutList;
-  static late List<WorkoutRecord> recordList;
+  static late List<WorkoutHistory> recordList;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 

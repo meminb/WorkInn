@@ -1,5 +1,4 @@
 class Exercise {
-  late int exerciseId;
   late String exerciseName;
   late String gifPath;
   late int setCount;
@@ -8,7 +7,6 @@ class Exercise {
   late int level;
 
   Exercise({
-    required this.exerciseId,
     required this.exerciseName,
     required this.gifPath,
     required this.setCount,
@@ -16,4 +14,24 @@ class Exercise {
     required this.muscleGroups,
     required this.level,
   });
+
+  Map<String, dynamic> toJson() => {
+        "exerciseName": exerciseName,
+        "gifPath": gifPath,
+        "setCount": setCount,
+        "muscleGroups": muscleGroups,
+        "level": level
+      };
+
+  Exercise.fromJson(Map<String, dynamic> json)
+      : exerciseName = json["exerciseName"],
+        gifPath = json["gifPath"],
+        setCount = json["setCount"],
+        muscleGroups = json["muscleGroups"],
+        level = json["level"];
+
+  @override
+  String toString() {
+    return 'Exercise(exerciseName: $exerciseName, gifPath: $gifPath, setCount: $setCount, muscleGroups: $muscleGroups, level: $level)';
+  }
 }
