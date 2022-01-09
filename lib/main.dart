@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:get/get.dart';
 import 'package:workinn/frontend/homepage.dart';
 import 'package:workinn/frontend/profile.dart';
 import 'package:workinn/frontend/statistics.dart';
+import 'package:workinn/repository/ExercisesRepository.dart';
+import 'package:workinn/repository/WorkoutRepository.dart';
+
+import 'frontend/autherization-pages/signin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
+  ExercisesRepository.assignExercisesFromDB();
+  WorkoutRepository.assignCommonWorkoutsFromCollection();
   runApp(MyApp());
 }
 
@@ -16,10 +22,10 @@ class MyApp extends StatelessWidget {
 // of your application.sd
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Firebase',
-      home: Main(),
+      home: SignIn(),
     );
   }
 }

@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:workinn/model/Exercise.dart';
 
 class ExercisesRepository {
-  getExercisesFromDB() {}
+  static List<Exercise> exercises = new List.empty(growable: true);
 
-  static getMarker() async {
+  static assignExercisesFromDB() async {
     var snapshot = FirebaseFirestore.instance.collection('exercises').get();
 
-    return snapshot.then((value) => value.docs.map((e) => e.data()));
+    snapshot.then((value) => exercises = value.docs
+        .map((documentSnapshot) => Exercise.fromJson(documentSnapshot.data()))
+        .toList());
   }
 }

@@ -16,7 +16,7 @@ class _HomepageState extends State<Homepage> {
     return Container(
       child: Scaffold(
         body: ListView(children: [
-          WorkoutWidgets.workoutListviewItem(TestConstants.workout1),
+          WorkoutWidgets.workoutListviewItem(TestConstants.workout1, context),
           ListTile(
             title: Text("dlskfj"),
           ),

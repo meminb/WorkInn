@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:workinn/frontend/exercises-pages/exercisepage.dart';
 import 'package:workinn/model/Exercise.dart';
 
 import '../../TestConstants.dart';
 
 class ExerciseMain extends StatefulWidget {
-  final List<Exercise> listOfExercises;
+  final List<Exercise?> listOfExercises;
   const ExerciseMain(this.listOfExercises);
 
   @override
@@ -24,7 +23,7 @@ class _ExerciseState extends State<ExerciseMain> {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Text(
-            TestConstants.workout1.programName,
+            TestConstants.workout1.workoutName,
             textAlign: TextAlign.left,
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
@@ -35,7 +34,7 @@ class _ExerciseState extends State<ExerciseMain> {
         Card(
           elevation: 5,
           child: ListTile(
-              title: Text(item.exerciseName),
+              title: Text(item!.exerciseName),
               subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -57,7 +56,12 @@ class _ExerciseState extends State<ExerciseMain> {
             primary: Colors.deepPurple.shade200,
           ),
           onPressed: () {
-            Get.to(ExercisePage(widget.listOfExercises));
+            //Get.to(ExercisePage(widget.listOfExercises));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ExercisePage(widget.listOfExercises)));
           },
           child: const Text('Start Workout'),
         ),

@@ -46,21 +46,22 @@ class UserRepository {
     });
   }
 
-  _setUserModel(User user) async {
+  _setUserModel(User? user) async {
     DocumentSnapshot docSnap = await FirebaseFirestore.instance
         .collection("users")
-        .doc(user.uid)
+        .doc(user!.uid)
         .get();
     USER.userID = user.uid;
     USER.name = docSnap.get("surname");
     USER.surname = docSnap.get('name');
+    //otherss....
   }
 
   Future<AuthResultStatus> signIn(String email, String password) async {
     try {
-      await FirebaseAuth.instance
+      UserCredential credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-
+      _setUserModel(credential.user);
       return AuthResultStatus.successful;
     } catch (e) {
       return AuthExceptionHandler.handleException(e);

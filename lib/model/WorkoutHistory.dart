@@ -1,19 +1,22 @@
 import 'package:workinn/model/Workout.dart';
 
-class WorkoutRecord {
-  late int id;
+class WorkoutHistory {
   late Workout workout;
   late DateTime dateTime;
   late int duration;
-  WorkoutRecord({
-    required this.id,
+  WorkoutHistory({
     required this.workout,
     required this.dateTime,
     required this.duration,
   });
+  Map<String, dynamic> toJson() => {
+        "workout": workout.workoutName,
+        "dateTime": dateTime,
+        "duration": duration
+      };
 
   @override
   String toString() {
-    return 'WorkoutRecord(id: $id, workout: $workout, dateTime: $dateTime, duration: $duration)';
+    return 'WorkoutRecord: workout: $workout, dateTime: $dateTime, duration: $duration)';
   }
 }

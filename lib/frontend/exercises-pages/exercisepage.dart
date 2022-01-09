@@ -4,7 +4,7 @@ import 'package:gif_view/gif_view.dart';
 import 'package:workinn/model/Exercise.dart';
 
 class ExercisePage extends StatefulWidget {
-  final List<Exercise> listOfExercises;
+  final List<Exercise?> listOfExercises;
   const ExercisePage(this.listOfExercises);
 
   @override
@@ -91,15 +91,15 @@ class _ExercisePageState extends State<ExercisePage> {
             ),
             child: Center(
                 child: Text((() {
-              if (widget.listOfExercises[0].setCount.toString() == "0") {
+              if (widget.listOfExercises[0]!.setCount.toString() == "0") {
                 if (!isSetTime) {
-                  _counter = widget.listOfExercises[0].setTime;
+                  _counter = widget.listOfExercises[0]!.setTime;
                   print(_counter);
                   isSetTime = true;
                 }
                 return "Time: $_counter";
               }
-              return "Count: ${widget.listOfExercises[0].setCount.toString()}";
+              return "Count: ${widget.listOfExercises[0]!.setCount.toString()}";
             })(),
                     style: TextStyle(
                         color: Colors.white,
@@ -107,7 +107,7 @@ class _ExercisePageState extends State<ExercisePage> {
                         fontWeight: FontWeight.bold))),
           ),
           GifView.network(
-            widget.listOfExercises[0].gifPath,
+            widget.listOfExercises[0]!.gifPath,
             height: 400,
             width: 400,
           ),
@@ -115,7 +115,7 @@ class _ExercisePageState extends State<ExercisePage> {
             height: 40,
             color: Colors.deepPurple[600],
             child: Center(
-                child: Text(widget.listOfExercises[0].exerciseName,
+                child: Text(widget.listOfExercises[0]!.exerciseName,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
