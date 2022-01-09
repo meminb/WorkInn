@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:workinn/Controller/Exercisecontroller.dart';
+import 'package:workinn/Controller/WorkoutController.dart';
+import 'package:workinn/Datas.dart';
 import 'package:workinn/frontend/homepage.dart';
 import 'package:workinn/frontend/profile.dart';
 import 'package:workinn/frontend/statistics.dart';
@@ -10,10 +13,16 @@ import 'frontend/autherization-pages/signin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WorkoutController workoutController =
+      new WorkoutController(repository: new WorkoutRepository());
+  ExerciseController exerciseController =
+      new ExerciseController(repository: new ExercisesRepository());
 
   await Firebase.initializeApp();
-  ExercisesRepository.assignExercisesFromDB();
-  WorkoutRepository.assignCommonWorkoutsFromCollection();
+
+  Datas.exercises = await exerciseController.assignExercisesFromDB();
+
+  Datas.workouts = await workoutController.assignCommonWorkoutsFromCollection();
   runApp(MyApp());
 }
 
