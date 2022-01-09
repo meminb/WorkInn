@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:workinn/frontend/exercises-pages/exercisepage.dart';
 import 'package:workinn/model/Exercise.dart';
@@ -6,6 +8,7 @@ import '../../TestConstants.dart';
 
 class ExerciseMain extends StatefulWidget {
   final List<Exercise?> listOfExercises;
+
   const ExerciseMain(this.listOfExercises);
 
   @override
@@ -21,15 +24,25 @@ class _ExerciseState extends State<ExerciseMain> {
       Card(
         elevation: 5,
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Text(
-            TestConstants.workout1.workoutName,
-            textAlign: TextAlign.left,
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
-        ),
+            padding: const EdgeInsets.all(15.0),
+            child: Image.network(
+                "https://cdn.dribbble.com/users/2789026/screenshots/6251389/yw_dribble.gif",
+                height: 200,
+                width: 200)),
         color: Colors.deepPurple,
       ),
+      SizedBox(height: 5),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          TestConstants.workout1.workoutName,
+          style: TextStyle(
+              color: Colors.yellow[800],
+              fontSize: 16,
+              fontWeight: FontWeight.bold),
+        ),
+      ),
+      SizedBox(height: 5),
       for (var item in widget.listOfExercises)
         Card(
           elevation: 5,
@@ -56,7 +69,6 @@ class _ExerciseState extends State<ExerciseMain> {
             primary: Colors.deepPurple.shade200,
           ),
           onPressed: () {
-            //Get.to(ExercisePage(widget.listOfExercises));
             Navigator.push(
                 context,
                 MaterialPageRoute(
