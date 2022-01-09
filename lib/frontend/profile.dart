@@ -19,19 +19,7 @@ class _ProfileState extends State<Profile> {
       child: FloatingActionButton(
         backgroundColor: Colors.blue,
         child: Icon(Icons.add),
-        onPressed: () async {
-          WorkoutHistoryRepository.saveWorkoutRecord(
-              TestConstants.workoutHistory1);
-          for (var item in WorkoutHistoryRepository.recordList) {
-            print(item.toString());
-          }
-          for (var item in ExercisesRepository.exercises) {
-            print(item.toString());
-          }
-          for (var item in WorkoutRepository.workouts) {
-            print(item.toString());
-          }
-        },
+        onPressed: () async {},
       ),
     );
   }

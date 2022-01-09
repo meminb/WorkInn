@@ -6,6 +6,8 @@ import 'package:workinn/frontend/statistics.dart';
 import 'package:workinn/repository/ExercisesRepository.dart';
 import 'package:workinn/repository/WorkoutRepository.dart';
 
+import 'frontend/autherization-pages/signin.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
