@@ -20,11 +20,13 @@ class Exercise {
         "gifPath": gifPath,
         "setCount": setCount,
         "muscleGroups": muscleGroups,
-        "level": level
+        "level": level,
+        "setTime": setTime
       };
 
   Exercise.fromJson(Map<String, dynamic> json)
-      : exerciseName = json["exerciseName"],
+      : setTime = json["setTime"],
+        exerciseName = json["exerciseName"],
         gifPath = json["gifPath"],
         setCount = json["setCount"],
         muscleGroups = json["muscleGroups"],
