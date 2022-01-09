@@ -1,3 +1,5 @@
+// ignore_for_file: must_call_super
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gif_view/gif_view.dart';

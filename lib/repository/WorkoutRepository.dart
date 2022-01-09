@@ -1,56 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:workinn/Datas.dart';
 import 'package:workinn/model/Exercise.dart';
 import 'package:workinn/model/USER.dart';
 import 'package:workinn/model/Workout.dart';
 import 'package:workinn/repository/ExercisesRepository.dart';
 
 class WorkoutRepository {
-  static List<Workout> workouts = new List.empty(growable: true);
-
-  static assignCommonWorkoutsFromCollection() {
+  Future<List<Workout>> assignCommonWorkoutsFromCollection() async {
     var snapshot = FirebaseFirestore.instance.collection('workouts').get();
-    return _getWorkoutsFromCollection(snapshot);
+    return await _getWorkoutsFromCollection(snapshot);
   }
 
-  static assignCustomWorkoutsFromCollection() {
+  Future<List<Workout>> assignCustomWorkoutsFromCollection() async {
     var snapshot = FirebaseFirestore.instance
         .collection('users')
         .doc(USER.userID)
         .collection("customWorkouts")
         .get();
-    return _getWorkoutsFromCollection(snapshot);
+    return await _getWorkoutsFromCollection(snapshot);
   }
 
-  static Exercise? _findExerciseByNameFromLocal(String name) {
-    for (var item in ExercisesRepository.exercises) {
-      if (item.exerciseName == name) {
-        return item;
-      }
-    }
-    return null;
-  }
-
-  static _getWorkoutsFromCollection(
-      Future<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-    snapshot.then((value) => workouts = value.docs.map((documentSnapshot) {
-          var data = documentSnapshot.data();
-
-          var exerciseNameList = data["exerciseList"];
-
-          List<Exercise?> exerciseList = new List.empty(growable: true);
-          for (var item in exerciseNameList) {
-            exerciseList.add(_findExerciseByNameFromLocal(item));
-          }
-
-          return new Workout(
-              workoutName: data["workoutName"],
-              exerciseList:
-                  exerciseList); /* Workout.fromJson(documentSnapshot.data())*/
-        }).toList());
-  }
-
-  static saveCustomWorkoutToUser(Workout workout) async {
+  saveCustomWorkoutToUser(Workout workout) async {
     if (FirebaseAuth.instance.currentUser != null) {
       final CollectionReference postsRef = FirebaseFirestore.instance
           .collection('users')
@@ -63,5 +34,40 @@ class WorkoutRepository {
     } else {
       print("Login first!");
     }
+  }
+
+  Exercise? _findExerciseByNameFromLocal(String name) {
+    for (var item in Datas.exercises) {
+      if (item.exerciseName == name) {
+        return item;
+      }
+    }
+    return null;
+  }
+
+  Future<List<Workout>> _getWorkoutsFromCollection(
+      Future<QuerySnapshot<Map<String, dynamic>>> snapshot) async {
+    List<Workout> list = new List.empty(growable: true);
+    await snapshot.then((value) => list = value.docs.map((documentSnapshot) {
+          var data = documentSnapshot.data();
+
+          var exerciseNameList = data["exerciseList"];
+
+          List<Exercise?> exerciseList = new List.empty(growable: true);
+          for (String item in exerciseNameList) {
+            Exercise? exercise = _findExerciseByNameFromLocal(item);
+            if (exercise != null) {
+              exerciseList.add(exercise);
+            }
+          }
+
+          return new Workout(
+              estimatedComplateTime: data["estimatedComplateTime"],
+              difficultyLevel: data["difficultyLevel"],
+              workoutName: data["workoutName"],
+              exerciseList:
+                  exerciseList); /* Workout.fromJson(documentSnapshot.data())*/
+        }).toList());
+    return list;
   }
 }

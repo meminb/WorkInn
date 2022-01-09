@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:workinn/TestConstants.dart';
-import 'package:workinn/frontend/profile.dart';
+import 'package:workinn/Datas.dart';
+import 'package:workinn/repository/WorkoutRepository.dart';
 import 'widgets/WorkoutWidgets.dart';
 
 class Homepage extends StatefulWidget {
@@ -15,42 +14,12 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        body: ListView(children: [
-          WorkoutWidgets.workoutListviewItem(TestConstants.workout1, context),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-          ListTile(
-            title: Text("dlskfj"),
-          ),
-        ]),
+        body: ListView.builder(
+            itemCount: Datas.workouts.length,
+            itemBuilder: (BuildContext context, int index) {
+              return WorkoutWidgets.workoutListviewItem(
+                  Datas.workouts[index], context);
+            }),
         floatingActionButton: FloatingActionButton(
           onPressed: () => _showMyDialog(),
           highlightElevation: 50,
