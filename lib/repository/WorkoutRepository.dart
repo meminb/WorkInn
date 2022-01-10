@@ -29,7 +29,6 @@ class WorkoutRepository {
           .collection("customWorkouts");
 
       Map<String, dynamic> postData = workout.toJson();
-      print(postData.toString());
       await postsRef.doc(workout.workoutName).set(postData);
     } else {
       print("Login first!");

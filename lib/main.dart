@@ -66,90 +66,15 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: appbar(),
       body: pages[_currentIndex],
       bottomNavigationBar: navigationbar(),
     );
   }
 
   void _onItemTapped(int index) {
-    switch (index) {
-      case 0:
-        {
-          _leadingButton = IconButton(
-            icon: ImageIcon(AssetImage('assets/images/dumbbell.png'),
-                color: Colors.black, size: 32),
-            onPressed: () {
-              // do something
-            },
-          );
-          _appBarTitle = 'WorkInn';
-          _actionButton = IconButton(
-            icon: new Icon(Icons.filter_list, color: Colors.black45, size: 32),
-            onPressed: () {
-              // do something
-            },
-          );
-        }
-        break;
-
-      case 1:
-        {
-          _leadingButton = IconButton(
-            icon: new Icon(Icons.arrow_back_ios, color: Colors.black, size: 32),
-            onPressed: () {
-              // do something
-            },
-          );
-          _appBarTitle = 'Progress';
-          _actionButton = IconButton(
-            icon: new Icon(Icons.swap_calls, color: Colors.black45, size: 32),
-            onPressed: () {
-              // do something
-            },
-          );
-        }
-        break;
-
-      case 2:
-        {
-          _leadingButton = IconButton(
-            icon: new Icon(Icons.arrow_back_ios, color: Colors.black, size: 32),
-            onPressed: () {
-              // do something
-            },
-          );
-          _appBarTitle = 'Profile';
-          _actionButton = IconButton(
-            icon:
-                new Icon(Icons.notifications, color: Colors.black45, size: 32),
-            onPressed: () {
-              // do something
-            },
-          );
-        }
-        break;
-
-      default:
-        {
-          //statements;
-        }
-        break;
-    }
     setState(() {
       _currentIndex = index;
     });
-  }
-
-  AppBar appbar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: Text(_appBarTitle,
-          style: TextStyle(color: Colors.deepPurple, fontFamily: 'Raleway')),
-      leading: _leadingButton,
-      actions: <Widget>[_actionButton],
-    );
   }
 
   //Navigation-Bar Design And Tapped Logic
