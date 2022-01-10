@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workinn/frontend/exercises-pages/exercisemain.dart';
-import 'package:workinn/model/Workout.dart';
 import 'package:workinn/model/WorkoutHistory.dart';
 
 class WorkoutHistoryWidgets {

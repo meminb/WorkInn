@@ -69,7 +69,7 @@ class CreateWorkoutState extends State<CreateWorkoutForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
           ),
           Text(
-            "Select Difficulty Level:",
+            "Select your goal:",
             style: TextStyle(fontSize: 16),
           ),
           SizedBox(
@@ -141,12 +141,21 @@ class CreateWorkoutState extends State<CreateWorkoutForm> {
                 if (_formKey.currentState!.validate()) {
                   print(
                       "height: $_height weight: $_weight  radio: $_radioSelected");
-                  Workout workout = widget.workoutController!
-                      .createCustomWorkout(
-                          _workoutName, _radioSelected!, _weight!, _height!);
-                  widget.workoutController!.saveCustomWorkoutToUser(workout);
 
-                  Navigator.pop(context);
+                  if (_height! < 130 ||
+                      _height! > 220 ||
+                      _weight! < 30 ||
+                      _weight! > 200) {
+                    Navigator.pop(context);
+                    showInSnackBar("There is no workout fits you 😔");
+                  } else {
+                    Workout workout = widget.workoutController!
+                        .createCustomWorkout(
+                            _workoutName, _radioSelected!, _weight!, _height!);
+                    widget.workoutController!.saveCustomWorkoutToUser(workout);
+
+                    Navigator.pop(context);
+                  }
                 }
               },
               child: const Text('Create workout'),
@@ -155,5 +164,12 @@ class CreateWorkoutState extends State<CreateWorkoutForm> {
         ],
       ),
     );
+  }
+
+  void showInSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: new Text(message),
+      duration: Duration(seconds: 5),
+    ));
   }
 }
