@@ -4,10 +4,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:workinn/frontend/exercises-pages/exercisemain.dart';
 import 'package:workinn/model/Exercise.dart';
+import 'package:workinn/model/Workout.dart';
+import 'package:workinn/model/WorkoutHistory.dart';
 
 class ExercisePage extends StatefulWidget {
-  final List<Exercise?> listOfExercises;
-  const ExercisePage(this.listOfExercises);
+  final Workout workout;
+  const ExercisePage(this.workout);
 
   @override
   _ExercisePageState createState() => _ExercisePageState();
@@ -15,83 +17,73 @@ class ExercisePage extends StatefulWidget {
 
 class _ExercisePageState extends State<ExercisePage> {
   int _currentExerciseIndex = 0;
-  int _currentIndex = 0;
-  IconData iconPlayOrPause = Icons.play_arrow;
-  int _counter = 20;
-  Timer? _timer = null;
-  bool isSetTime = false;
-
+  int _currentIndex = 1;
+  IconData iconPlayOrPause = Icons.pause;
+  bool isPauseTimer = false;
   int _workoutCounter = 0;
   Timer? _workoutTimer = null;
 
   @protected
   @mustCallSuper
   void initState() {
-    _workoutTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        _workoutCounter++;
-      });
-    });
+    _startWorkoutTimer();
   }
 
-  void _stopWorkoutTimer() {
+  void _startWorkoutTimer() {
+    if (!isPauseTimer) {
+      _workoutTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+        setState(() {
+          _workoutCounter++;
+        });
+      });
+    }
+  }
+
+  void _finishWorkoutTimer() {
     _workoutTimer!.cancel();
-  }
-
-  void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        print(_counter);
-        if (_counter > 0) {
-          _counter--;
-        } else {
-          isSetTime = false;
-          _timer!.cancel();
-        }
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer!.cancel();
+    WorkoutHistory workoutHistory = new WorkoutHistory(
+        workout: widget.workout,
+        dateTime: DateTime.now(),
+        duration: _workoutCounter * 1000);
   }
 
   void _onItemTapped(int index) {
-    print(index);
     switch (index) {
       case 0:
         {
           if (_currentExerciseIndex > 0) {
-            dispose();
-            isSetTime = false;
-            _currentExerciseIndex--;
+            setState(() {
+              _currentExerciseIndex--;
+            });
           }
-          iconPlayOrPause = Icons.play_arrow;
         }
         break;
 
       case 1:
         {
+          _workoutTimer!.cancel();
           if (iconPlayOrPause == Icons.pause) {
-            _stopWorkoutTimer();
-            iconPlayOrPause = Icons.play_arrow;
-            dispose();
+            setState(() {
+              iconPlayOrPause = Icons.play_arrow;
+              isPauseTimer = true;
+            });
           } else {
-            iconPlayOrPause = Icons.pause;
-            _startTimer();
+            setState(() {
+              iconPlayOrPause = Icons.pause;
+              isPauseTimer = false;
+            });
+            _startWorkoutTimer();
           }
         }
         break;
 
       case 2:
         {
-          if (_currentExerciseIndex < widget.listOfExercises.length - 1) {
-            dispose();
-            isSetTime = false;
-            _currentExerciseIndex++;
+          if (_currentExerciseIndex < widget.workout.exerciseList.length - 1) {
+            setState(() {
+              _currentExerciseIndex++;
+            });
           }
-          iconPlayOrPause = Icons.play_arrow;
         }
         break;
 
@@ -101,18 +93,34 @@ class _ExercisePageState extends State<ExercisePage> {
         }
         break;
     }
-    setState(() {
-      _currentIndex = index;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Workout'),
-        backgroundColor: Colors.deepPurple,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          backgroundColor: Colors.yellow[800],
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 4,
+              ),
+              Row(
+                children: [
+                  Text(widget.workout.workoutName),
+                  SizedBox(width: 80),
+                  Text(
+                    "Total Time: ${_workoutCounter}",
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
       body: ListView(
         children: <Widget>[
@@ -132,19 +140,13 @@ class _ExercisePageState extends State<ExercisePage> {
                     ),
                     child: Center(
                         child: Text((() {
-                      if (widget
-                              .listOfExercises[_currentExerciseIndex]!.setCount
+                      if (widget.workout.exerciseList[_currentExerciseIndex]!
+                              .repeatCount
                               .toString() ==
                           "0") {
-                        if (!isSetTime) {
-                          _counter = widget
-                              .listOfExercises[_currentExerciseIndex]!.setTime;
-                          print(_counter);
-                          isSetTime = true;
-                        }
-                        return "$_counter";
+                        return "${widget.workout.exerciseList[_currentExerciseIndex]!.setTime}sec";
                       }
-                      return "${widget.listOfExercises[_currentExerciseIndex]!.setCount.toString()}";
+                      return "${widget.workout.exerciseList[_currentExerciseIndex]!.repeatCount.toString()}rep";
                     })(),
                             style: TextStyle(
                                 color: Colors.white,
@@ -165,7 +167,7 @@ class _ExercisePageState extends State<ExercisePage> {
                   ),
                   child: Center(
                       child: Text(
-                          "x${widget.listOfExercises[_currentExerciseIndex]!.repeatCount.toString()}",
+                          "x${widget.workout.exerciseList[_currentExerciseIndex]!.setCount.toString()}",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -174,31 +176,34 @@ class _ExercisePageState extends State<ExercisePage> {
               ],
             ),
           ),
-          Image.network(widget.listOfExercises[_currentExerciseIndex]!.gifPath,
-              height: 400, width: 400),
+          Image.network(
+              widget.workout.exerciseList[_currentExerciseIndex]!.gifPath,
+              height: 400,
+              width: 400),
           Container(
             height: 40,
             color: Colors.deepPurple[600],
             child: Center(
                 child: Text(
-                    widget.listOfExercises[_currentExerciseIndex]!.exerciseName,
+                    widget.workout.exerciseList[_currentExerciseIndex]!
+                        .exerciseName,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontWeight: FontWeight.bold))),
           ),
-          if (_currentExerciseIndex == widget.listOfExercises.length - 1)
+          if (_currentExerciseIndex == widget.workout.exerciseList.length - 1)
             ElevatedButton(
+              child: Text('Finish Workout'),
               style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(fontSize: 15),
                 elevation: 5,
                 primary: Colors.deepPurple.shade200,
               ),
               onPressed: () {
-                print("A");
+                _finishWorkoutTimer();
               },
-              child: const Text('Finish Workout'),
-            ),
+            )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -23,7 +23,10 @@ class WorkoutWidgets {
               Text("Number of Exercises: ${workout.exerciseList.length}")
             ],
           ),
-          trailing: Icon(Icons.ac_unit),
+          trailing: Icon(
+            Icons.star,
+            color: Colors.yellow[800],
+          ),
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ExerciseMain(workout)));
