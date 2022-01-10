@@ -21,25 +21,27 @@ class WorkoutHistoryRepository {
     }
   }
 
-  getUserWorkoutHistory() {
+  Future<List<WorkoutHistory>> getUserWorkoutHistory() async {
     if (USER.userID != "") {
       var snapshot = FirebaseFirestore.instance
           .collection('users')
           .doc(USER.userID)
           .collection("workoutHistory")
-          .orderBy("dateTime")
           .get();
       List<WorkoutHistory> recordList = new List.empty(growable: true);
-      snapshot.then((value) => recordList = value.docs.map((documentSnapshot) {
-            var data = documentSnapshot.data();
+      await snapshot
+          .then((value) => recordList = value.docs.map((documentSnapshot) {
+                var data = documentSnapshot.data();
 
-            return new WorkoutHistory(
-                workout: _findWorkoutByName(data["workout"]),
-                dateTime: data["dateTime"],
-                duration: data[
-                    "duration"]); /* Workout.fromJson(documentSnapshot.data())*/
-          }).toList());
+                return new WorkoutHistory(
+                    workout: _findWorkoutByName(data["workout"]),
+                    dateTime: (data["dateTime"].toDate()),
+                    duration: (data["duration"] / 1000).round());
+              }).toList());
+      return recordList;
     }
+    print("No User");
+    return List.empty();
   }
 
   static _findWorkoutByName(String name) {

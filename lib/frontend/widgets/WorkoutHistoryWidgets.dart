@@ -21,7 +21,7 @@ class WorkoutHistoryWidgets {
               SizedBox(height: 5),
               Text("Date Time: ${workoutHistory.dateTime}"),
               SizedBox(height: 5),
-              Text("Duration of Workout: ${workoutHistory.duration}")
+              Text("Duration of Workout: ${workoutHistory.duration} sec")
             ],
           ),
           trailing: Icon(
