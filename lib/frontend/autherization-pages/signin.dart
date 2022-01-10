@@ -91,6 +91,8 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(color: Colors.black54),
                   ),
                   onPressed: () {
+                    showInSnackBarUseCases(
+                        "Forgot Password does not impelemented yet.");
                     //   waitingForGo();
                   },
                 ),
@@ -122,6 +124,13 @@ class _SignInState extends State<SignIn> {
 
   void showInSnackBar(AuthResultStatus value) {
     var message = AuthExceptionHandler().generateExceptionMessage(value);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: new Text(message),
+      duration: Duration(seconds: 5),
+    ));
+  }
+
+  void showInSnackBarUseCases(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: new Text(message),
       duration: Duration(seconds: 5),
