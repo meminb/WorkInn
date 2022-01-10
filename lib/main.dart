@@ -22,7 +22,8 @@ void main() async {
 
   Datas.exercises = await exerciseController.assignExercisesFromDB();
 
-  Datas.workouts = await workoutController.assignCommonWorkoutsFromCollection();
+  Datas.workouts = await workoutController.getCommonWorkoutsFromCollection();
+  // Datas.customWorkouts =await workoutController.getCustomWorkoutsFromCollection();
   runApp(MyApp());
 }
 
