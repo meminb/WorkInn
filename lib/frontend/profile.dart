@@ -6,8 +6,10 @@ import 'package:workinn/Controller/WorkoutHistoryController.dart';
 import 'package:workinn/Datas.dart';
 import 'package:workinn/frontend/widgets/Common.dart';
 import 'package:workinn/frontend/widgets/CreateWorkoutForm.dart';
+import 'package:workinn/frontend/widgets/WorkoutHistoryWidgets.dart';
 import 'package:workinn/frontend/widgets/WorkoutWidgets.dart';
 import 'package:workinn/model/Workout.dart';
+import 'package:workinn/model/WorkoutHistory.dart';
 import 'package:workinn/repository/ExercisesRepository.dart';
 import 'package:workinn/repository/WorkoutHistoryRepository.dart';
 import 'package:workinn/repository/WorkoutRepository.dart';
@@ -55,12 +57,36 @@ class _ProfileState extends State<Profile> {
               style: TextStyle(fontSize: 16),
             )),
           ),
+          Expanded(
+            child: FutureBuilder<List<Workout>>(
+              future: workoutHistoryController.workoutHistoryRepository
+                  .getLast2WorkoutHistoryFromRepository(), // async work
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Workout>> snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return Text('Loading....');
+                  default:
+                    if (snapshot.hasError)
+                      return Text('Error: ${snapshot.error}');
+                    else
+                      return ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return WorkoutWidgets.workoutListviewItem(
+                                snapshot.data![index], context);
+                          });
+                }
+              },
+            ),
+          ),
           Container(
             height: 35,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
                 gradient: LinearGradient(
-                    colors: new List.from([Colors.red[200], Colors.red]))),
+                    colors:
+                        new List.from([Colors.yellow[800], Colors.yellow]))),
             child: Center(
                 child: Text(
               "Custom Workouts",

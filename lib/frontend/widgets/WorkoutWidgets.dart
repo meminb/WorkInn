@@ -5,9 +5,6 @@ import 'package:workinn/model/Workout.dart';
 
 class WorkoutWidgets {
   static Widget workoutListviewItem(Workout workout, BuildContext context) {
-    for (var item in workout.exerciseList) {
-      print(item);
-    }
     return Card(
       elevation: 5,
       child: ListTile(
