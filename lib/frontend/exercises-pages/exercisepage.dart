@@ -118,11 +118,12 @@ class _ExercisePageState extends State<ExercisePage> {
                 height: 4,
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(widget.workout.workoutName),
-                  SizedBox(width: 40),
+                  SizedBox(width: 20),
                   Text(
-                    "Total Time: ${_workoutCounter}",
+                    "Time: $_workoutCounter",
                   ),
                 ],
               ),

@@ -20,9 +20,7 @@ class _HomepageState extends State<Homepage> {
     IconButton(
       icon:
           new Icon(Icons.workspaces_outlined, color: Colors.black45, size: 32),
-      onPressed: () {
-        // do something
-      },
+      onPressed: () {},
     )
   ]);
   @override
