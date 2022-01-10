@@ -22,6 +22,7 @@ class _ExerciseState extends State<ExerciseMain> {
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(60),
               child: AppBar(
+                backgroundColor: Colors.yellow[800],
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -93,7 +94,7 @@ class _ExerciseState extends State<ExerciseMain> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                ExercisePage(widget.workout.exerciseList)));
+                                ExercisePage(widget.workout)));
                   },
                   child: const Text('Start Workout'),
                 ),
