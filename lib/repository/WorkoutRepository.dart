@@ -7,18 +7,23 @@ import 'package:workinn/model/Workout.dart';
 import 'package:workinn/repository/ExercisesRepository.dart';
 
 class WorkoutRepository {
-  Future<List<Workout>> assignCommonWorkoutsFromCollection() async {
+  Future<List<Workout>> getCommonWorkoutsFromCollection() async {
     var snapshot = FirebaseFirestore.instance.collection('workouts').get();
     return await _getWorkoutsFromCollection(snapshot);
   }
 
-  Future<List<Workout>> assignCustomWorkoutsFromCollection() async {
-    var snapshot = FirebaseFirestore.instance
-        .collection('users')
-        .doc(USER.userID)
-        .collection("customWorkouts")
-        .get();
-    return await _getWorkoutsFromCollection(snapshot);
+  Future<List<Workout>> getCustomWorkoutsFromCollection() async {
+    try {
+      var snapshot = FirebaseFirestore.instance
+          .collection('users')
+          .doc(USER.userID)
+          .collection("customWorkouts")
+          .get();
+      return await _getWorkoutsFromCollection(snapshot);
+    } catch (e) {
+      print(e.toString());
+      return List.empty();
+    }
   }
 
   saveCustomWorkoutToUser(Workout workout) async {

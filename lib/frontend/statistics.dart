@@ -3,8 +3,6 @@ import 'package:workinn/frontend/widgets/Common.dart';
 import 'package:workinn/frontend/widgets/WorkoutHistoryWidgets.dart';
 import 'package:workinn/model/Workout.dart';
 import 'package:workinn/model/WorkoutHistory.dart';
-import 'package:workinn/repository/ExercisesRepository.dart';
-import 'package:workinn/repository/WorkoutRepository.dart';
 
 import '../Datas.dart';
 
