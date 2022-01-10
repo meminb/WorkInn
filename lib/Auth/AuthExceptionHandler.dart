@@ -61,7 +61,7 @@ class AuthExceptionHandler {
             "Bu e-posta kullanılmakta.Tekrar deneyin ya da şifrenizi sıfırlayın.";
         break;
       default:
-        errorMessage = "Bir hata oluştu!";
+        errorMessage = "Wrong email or password!";
     }
 
     return errorMessage;
