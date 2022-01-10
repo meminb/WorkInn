@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:workinn/Controller/WorkoutController.dart';
+import 'package:workinn/Controller/WorkoutHistoryController.dart';
 import 'package:workinn/Datas.dart';
 import 'package:workinn/frontend/widgets/Common.dart';
 import 'package:workinn/frontend/widgets/CreateWorkoutForm.dart';
@@ -21,6 +22,9 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   WorkoutController? workoutController =
       new WorkoutController(repository: new WorkoutRepository());
+  WorkoutHistoryController workoutHistoryController =
+      new WorkoutHistoryController(
+          workoutHistoryRepository: new WorkoutHistoryRepository());
 
   var _actionButtons = new List<Widget>.from([
     IconButton(

@@ -2,10 +2,12 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:workinn/Controller/WorkoutHistoryController.dart';
 import 'package:workinn/frontend/exercises-pages/exercisemain.dart';
 import 'package:workinn/model/Exercise.dart';
 import 'package:workinn/model/Workout.dart';
 import 'package:workinn/model/WorkoutHistory.dart';
+import 'package:workinn/repository/WorkoutHistoryRepository.dart';
 
 class ExercisePage extends StatefulWidget {
   final Workout workout;
@@ -16,6 +18,9 @@ class ExercisePage extends StatefulWidget {
 }
 
 class _ExercisePageState extends State<ExercisePage> {
+  WorkoutHistoryController workoutHistoryController =
+      new WorkoutHistoryController(
+          workoutHistoryRepository: new WorkoutHistoryRepository());
   int _currentExerciseIndex = 0;
   int _currentIndex = 1;
   IconData iconPlayOrPause = Icons.pause;
@@ -45,6 +50,8 @@ class _ExercisePageState extends State<ExercisePage> {
         workout: widget.workout,
         dateTime: DateTime.now(),
         duration: _workoutCounter * 1000);
+
+    workoutHistoryController.saveWorkoutRecord(workoutHistory);
   }
 
   void _onItemTapped(int index) {
@@ -112,7 +119,7 @@ class _ExercisePageState extends State<ExercisePage> {
               Row(
                 children: [
                   Text(widget.workout.workoutName),
-                  SizedBox(width: 80),
+                  SizedBox(width: 40),
                   Text(
                     "Total Time: ${_workoutCounter}",
                   ),
