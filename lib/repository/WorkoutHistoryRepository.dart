@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workinn/Datas.dart';
 import 'package:workinn/model/USER.dart';
+import 'package:workinn/model/Workout.dart';
 import 'package:workinn/model/WorkoutHistory.dart';
 import 'package:workinn/repository/WorkoutRepository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -50,5 +51,31 @@ class WorkoutHistoryRepository {
         return item;
       }
     }
+  }
+
+  Future<List<Workout>> getLast2WorkoutHistoryFromRepository() async {
+    if (USER.userID != "") {
+      var snapshot = FirebaseFirestore.instance
+          .collection('users')
+          .doc(USER.userID)
+          .collection("workoutHistory")
+          .get();
+      List<Workout> lastTwoWorkout = new List.empty(growable: true);
+      List<WorkoutHistory> recordHistoryList = new List.empty(growable: true);
+      await snapshot.then(
+          (value) => recordHistoryList = value.docs.map((documentSnapshot) {
+                var data = documentSnapshot.data();
+
+                return new WorkoutHistory(
+                    workout: _findWorkoutByName(data["workout"]),
+                    dateTime: (data["dateTime"].toDate()),
+                    duration: (data["duration"] / 1000).round());
+              }).toList());
+      lastTwoWorkout.add(recordHistoryList[0].workout);
+      lastTwoWorkout.add(recordHistoryList[1].workout);
+      return lastTwoWorkout;
+    }
+    print("No User");
+    return List.empty();
   }
 }

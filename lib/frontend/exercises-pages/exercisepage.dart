@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:workinn/Controller/WorkoutHistoryController.dart';
 import 'package:workinn/frontend/exercises-pages/exercisemain.dart';
+import 'package:workinn/frontend/widgets/CreateFeedBackPopup.dart';
 import 'package:workinn/model/Exercise.dart';
 import 'package:workinn/model/Workout.dart';
 import 'package:workinn/model/WorkoutHistory.dart';
@@ -209,6 +210,7 @@ class _ExercisePageState extends State<ExercisePage> {
               ),
               onPressed: () {
                 _finishWorkoutTimer();
+                _showMyDialog();
               },
             )
         ],
@@ -233,5 +235,21 @@ class _ExercisePageState extends State<ExercisePage> {
         selectedItemColor: Colors.amber[800],
       ),
     ));
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[CreateFeedBackPopup()],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

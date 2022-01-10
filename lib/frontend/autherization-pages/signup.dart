@@ -27,8 +27,8 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.green[400],
-        title: Text('Kaydol'),
+        backgroundColor: Colors.deepPurple[400],
+        title: Text('Sign Up'),
       ),
       body: ScaffoldMessenger(
         key: scaffoldMessengerKey,
@@ -47,7 +47,7 @@ class _SignUpState extends State<SignUp> {
                         return null;
                       },
                       onSaved: (input) => _email = input!,
-                      decoration: decor('E-Posta'),
+                      decoration: decor('Email'),
                     ),
                     Container(height: 12),
                     TextFormField(
@@ -58,7 +58,7 @@ class _SignUpState extends State<SignUp> {
                         return null;
                       },
                       onSaved: (input) => _password = input!,
-                      decoration: decor('Şifre'),
+                      decoration: decor('Password'),
                       obscureText: true,
                     ),
                     Container(height: 12),
@@ -70,7 +70,7 @@ class _SignUpState extends State<SignUp> {
                         return null;
                       },
                       onSaved: (input) => _name = input!,
-                      decoration: decor('İsim:'),
+                      decoration: decor('Name:'),
                     ),
                     Container(height: 12),
                     TextFormField(
@@ -81,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                         return null;
                       },
                       onSaved: (input) => _surname = input!,
-                      decoration: decor('Soyad:'),
+                      decoration: decor('Surname:'),
                     ),
                     Container(height: 12),
                     Padding(
@@ -99,8 +99,8 @@ class _SignUpState extends State<SignUp> {
                           //  Navigator.of(context).pushNamed(HomePage.tag);
                         },
                         padding: EdgeInsets.all(12),
-                        color: Colors.green[400],
-                        child: Text('Kayıt Ol',
+                        color: Colors.deepPurple[400],
+                        child: Text('Sign up',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
