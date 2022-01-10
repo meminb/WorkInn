@@ -41,9 +41,9 @@ class _SignUpState extends State<SignUp> {
                   children: <Widget>[
                     TextFormField(
                       validator: (input) {
-                        /* if (input.isEmpty) {
-                            return 'Bu alan boş bırakılamaz';
-                          }*/
+                        if (input == "" || input == null) {
+                          return 'Bu alan boş bırakılamaz';
+                        }
                         return null;
                       },
                       onSaved: (input) => _email = input!,
@@ -52,9 +52,9 @@ class _SignUpState extends State<SignUp> {
                     Container(height: 12),
                     TextFormField(
                       validator: (input) {
-                        /*  if (input.length < 7) {
-                            return 'En az 6 karakter olmalı!';
-                          }*/
+                        if (input!.length < 7) {
+                          return 'En az 6 karakter olmalı!';
+                        }
                         return null;
                       },
                       onSaved: (input) => _password = input!,
@@ -115,6 +115,11 @@ class _SignUpState extends State<SignUp> {
     if (formState!.validate()) {
       formState.save();
       var result = controller.signUp(_email, _password, _name, _surname);
+      if (result != AuthResultStatus.successful) {
+        showInSnackBarUseCases("Can not sign up!");
+        return;
+      }
+
       setState(() {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Main()));
@@ -126,6 +131,13 @@ class _SignUpState extends State<SignUp> {
     var message = AuthExceptionHandler().generateExceptionMessage(value);
 
     scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
+      content: new Text(message),
+      duration: Duration(seconds: 5),
+    ));
+  }
+
+  void showInSnackBarUseCases(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: new Text(message),
       duration: Duration(seconds: 5),
     ));
