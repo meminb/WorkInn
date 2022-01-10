@@ -20,7 +20,7 @@ class _SignInState extends State<SignIn> {
   UserController controller = new UserController(new UserRepository());
   @override
   Widget build(BuildContext context) {
-    signIn("kucuksaid@hotmail.com", "123123123"); //auto login
+    //signIn("kucuksaid@hotmail.com", "123123123"); //auto login
     return Scaffold(
       backgroundColor: Colors.white,
       key: _scaffoldKey,
@@ -32,13 +32,12 @@ class _SignInState extends State<SignIn> {
               padding: EdgeInsets.only(left: 24.0, right: 24.0),
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  height: 125,
-                  width: 125,
-                  // child: Image.asset('assets/logo.png')
-                ),
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                    ),
+                    height: 250,
+                    width: 250,
+                    child: Image.asset('assets/images/logo.png')),
                 Container(height: 12),
                 TextFormField(
                   validator: (input) {
@@ -63,7 +62,7 @@ class _SignInState extends State<SignIn> {
                   },
                   controller: _password,
                   decoration: InputDecoration(
-                    hintText: 'Şifre',
+                    hintText: 'Password',
                     contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(32.0)),
@@ -81,14 +80,14 @@ class _SignInState extends State<SignIn> {
                       //signIn(_email.text, _password.text);
                     },
                     padding: EdgeInsets.all(12),
-                    color: Colors.green[400],
-                    child: Text('Giriş Yap',
-                        style: TextStyle(color: Colors.white)),
+                    color: Colors.deepPurple[400],
+                    child:
+                        Text('Sign In', style: TextStyle(color: Colors.white)),
                   ),
                 ),
                 FlatButton(
                   child: Text(
-                    'Şifremi Unuttum!',
+                    'Forgot Password!',
                     style: TextStyle(color: Colors.black54),
                   ),
                   onPressed: () {
@@ -97,7 +96,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 FlatButton(
                   child: Text(
-                    'Hesap Oluştur',
+                    'Sign Up',
                     style: TextStyle(color: Colors.black54),
                   ),
                   onPressed: () {
