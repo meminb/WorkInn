@@ -11,7 +11,7 @@ class Workout {
       {required this.workoutName,
       required this.exerciseList,
       required this.estimatedComplateTime,
-      required this.difficultyLevel, workout});
+      required this.difficultyLevel});
 
   Map<String, dynamic> toJson() => {
         "workoutName": workoutName,

@@ -49,6 +49,7 @@ class WorkoutRepository {
     return null;
   }
 
+
   Future<List<Workout>> _getWorkoutsFromCollection(
       Future<QuerySnapshot<Map<String, dynamic>>> snapshot) async {
     List<Workout> list = new List.empty(growable: true);
