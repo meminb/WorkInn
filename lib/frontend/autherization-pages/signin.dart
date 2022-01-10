@@ -20,7 +20,7 @@ class _SignInState extends State<SignIn> {
   UserController controller = new UserController(new UserRepository());
   @override
   Widget build(BuildContext context) {
-    //signIn("kucuksaid@hotmail.com", "123123123"); //auto login
+    signIn("kucuksaid@hotmail.com", "123123123"); //auto login
     return Scaffold(
       backgroundColor: Colors.white,
       key: _scaffoldKey,
