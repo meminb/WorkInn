@@ -77,7 +77,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     onPressed: () {
                       //print(_email.text);
-                      //signIn(_email.text, _password.text);
+                      signIn(_email.text, _password.text);
                     },
                     padding: EdgeInsets.all(12),
                     color: Colors.deepPurple[400],
